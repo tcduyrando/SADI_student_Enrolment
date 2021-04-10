@@ -62,9 +62,13 @@ public class StudentEnrolmentSystem implements StudentEnrolmentManager {
 				String sem = scan1.next();
 				StudentEnrolment se = new StudentEnrolment(s, c, sem);
 				enrolmentList.add(se);
-				System.out.println("Enrolment added: \n"
-						+ "[Student= {id=" + se.getStudent().getId() + ", name=" + se.getStudent().getName() + ", birthdate=" + se.getStudent().getBirthdate() + "}, "
-						+ "Course= {id=" + se.getCourse().getId() + ", name=" + se.getCourse().getName() + ", number of credits=" + se.getCourse().getNumOfCredits() + "}, "
+				System.out.println("New enrolment added! \n"
+						+ "[Student= {id=" + se.getStudent().getId() 
+						+ ", name=" + se.getStudent().getName() 
+						+ ", birthdate=" + se.getStudent().getBirthdate() + "}, "
+						+ "Course= {id=" + se.getCourse().getId() 
+						+ ", name=" + se.getCourse().getName() 
+						+ ", credits=" + se.getCourse().getNumOfCredits() + "}, "
 						+ "semester=" + se.getSemester() + "]");
 			}
 		}
@@ -95,15 +99,22 @@ public class StudentEnrolmentSystem implements StudentEnrolmentManager {
 	}
 	
 	public void displayAllEnrolments() {
+		System.out.println("Displaying all enrolments...");
 		for (StudentEnrolment se: enrolmentList) {
-			System.out.println("[Student ID: " + se.getStudent().getId());
-			System.out.println("Student name: " + se.getStudent().getName());
-			System.out.println("Student birthdate: " + se.getStudent().getBirthdate());
-			System.out.println("Course ID: " + se.getCourse().getId());
-			System.out.println("Course name: " + se.getCourse().getName());
-			System.out.println("Course credits: " + se.getCourse().getNumOfCredits());
-			System.out.println("Semester: " + se.getSemester() + "]");
-			
+//			System.out.println("[Student ID: " + se.getStudent().getId());
+//			System.out.println("Student name: " + se.getStudent().getName());
+//			System.out.println("Student birthdate: " + se.getStudent().getBirthdate());
+//			System.out.println("Course ID: " + se.getCourse().getId());
+//			System.out.println("Course name: " + se.getCourse().getName());
+//			System.out.println("Course credits: " + se.getCourse().getNumOfCredits());
+//			System.out.println("Semester: " + se.getSemester() + "]");
+			System.out.println("[Student= {id=" + se.getStudent().getId() 
+					+ ", name=" + se.getStudent().getName() 
+					+ ", birthdate=" + se.getStudent().getBirthdate() + "}, "
+					+ "Course= {id=" + se.getCourse().getId() 
+					+ ", name=" + se.getCourse().getName() 
+					+ ", credits=" + se.getCourse().getNumOfCredits() + "}, "
+					+ "semester=" + se.getSemester() + "]");
 		}
 	}
 
