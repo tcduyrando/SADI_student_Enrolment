@@ -2,7 +2,7 @@ package enrolmentSystem;
 
 public interface StudentEnrolmentManager {
 	
-	public void add(StudentEnrolment se);
+	public void addEnrolment();
 	
 	public void update();
 	
