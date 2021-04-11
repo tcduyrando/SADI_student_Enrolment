@@ -58,39 +58,65 @@ public class StudentEnrolmentSystem implements StudentEnrolmentManager {
 			System.out.print("Enter semester: ");
 			String sem = scanner1.next();
 			ArrayList<Course> cs = new ArrayList<Course>();
-			int u2 = 0;
-			while(u2 == 0) {
-				System.out.print("Enter course ID: ");
+			int k1 = 0;
+			while(k1 == 0) {
+				System.out.print("(Q to cancel) Enter course ID: ");
 				String cId = scanner1.next();
-				Course cItem = isCourseIncluded(cId);
-				if (cItem == null) {
-					System.out.println("ERROR: Course with ID " + cId + " does not exist");
+				if (cId.equals("q") || cId.equals("Q")) {
+					System.out.println("Cancelling...");
+					k1 = 1;
+					break;
 				} else {
-					cs.add(cItem);
-					char u;
-					int u3 = 0;
-					while (u3 == 0) {
-						System.out.print("Do you want to add another course? (Y/N): ");
-						u = scanner1.next().charAt(0);
-						
-						if (u == 'n' || u == 'N') {
-							StudentEnrolment se = new StudentEnrolment(sItem, cs, sem);
-							enrolmentList.add(se);
-							System.out.println("New enrolment added!");
-							System.out.println(se);
-							u2 = 1;
-							scanner1.close();
-							break;
-							
-						} else if (u == 'y' || u == 'Y') {
-							u3 = 1;
-						} else {
-							System.out.println("ERROR: Invalid option");
+					Course cItem = isCourseIncluded(cId);
+					if (cItem == null) {
+						System.out.println("ERROR: Course with ID " + cId + " does not exist");
+					} else {
+						cs.add(cItem);
+						char u;
+						int k2 = 0;
+						while (k2 == 0) {
+							System.out.print("Do you want to add another course? (Y/N): ");
+							u = scanner1.next().charAt(0);
+							if (u == 'n' || u == 'N') {
+								k1 = 1;
+								break;
+							} else if (u == 'y' || u == 'Y') {
+								k2 = 1;
+							} else {
+								System.out.println("ERROR: Invalid option");
+							}
 						}
 					}
 				}
-//				break;
 			}
+			
+			if (!cs.isEmpty()) {
+				System.out.println("Courses chosen: ");
+				for (Course c:cs) {
+					System.out.println(" - " + c);
+				}
+				char u2;
+				int k3 = 0;
+				while (k3 == 0) {
+					System.out.print("Please confirm you want to enrol in these courses (Y/N): ");
+					u2 = scanner1.next().charAt(0);
+					if (u2 == 'n' || u2 == 'N') {
+						System.out.println("FAILED: Enrolment is not confirmed");
+						break;
+					} else if (u2 == 'y' || u2 == 'Y') {
+						StudentEnrolment se = new StudentEnrolment(sItem, cs, sem);
+						enrolmentList.add(se);
+						System.out.println("SUCCESS: New enrolment added!");
+						System.out.println(se);
+						break;
+					} else {
+						System.out.println("ERROR: Invalid option");
+					}
+				}
+			} else {
+				System.out.println("FAILED: No courses were specified");
+			}
+			
 		}
 	}
 	
@@ -110,10 +136,6 @@ public class StudentEnrolmentSystem implements StudentEnrolmentManager {
 				System.out.println("ERROR: Enrolment with student ID " + sId + " and semester " + sem + " does not exist");
 			} else {
 				System.out.println("Enrolment found: ");
-//				System.out.println(se.getStudent() + ", Semester=" + se.getSemester());
-//				for (Course c:se.getCourses()) {
-//					System.out.println(c);
-//				}
 				System.out.println(" - " + se);
 				System.out.println("Press 1 to Delete a course");
 				System.out.println("Press 2 to Add a course");
@@ -135,46 +157,67 @@ public class StudentEnrolmentSystem implements StudentEnrolmentManager {
 							if (cIndex < 0 || cIndex > i - 1) {
 								System.out.println("ERROR: Invalid index number");
 							} else {
-								System.out.println("Course " + se.getCourses().get(cIndex).getName() + " is removed from this enrolment");
-								se.getCourses().remove(cIndex);
-								break;
+								char u2;
+								int k3 = 0;
+								while (k3 == 0) {
+									System.out.print("Please confirm you want to delete this course (Y/N): ");
+									u2 = scanner1.next().charAt(0);
+									if (u2 == 'n' || u2 == 'N') {
+										System.out.println("FAILED: Deletion is not confirmed");
+										u1 = 1;
+										break;
+									} else if (u2 == 'y' || u2 == 'Y') {
+										System.out.println("SUCCESS: Course " + se.getCourses().get(cIndex).getName() + " is removed from this enrolment");
+										se.getCourses().remove(cIndex);
+										u1 = 1;
+										break;
+									} else {
+										System.out.println("ERROR: Invalid option");
+									}
+								}
 							}
 						}
 						break;
 					// Press 2 to Add a course
 					case 2:
-						int u2 = 0;
-						while(u2 == 0) {
-							System.out.print("Enter course ID to add: ");
+						int k1 = 0;
+						while(k1 == 0) {
+							System.out.print("(Q to cancel) Enter course ID to add: ");
 							String cId = scanner1.next();
-							Course cItem = isCourseIncluded(cId);
-							if (cItem == null) {
-								System.out.println("ERROR: Course with ID " + cId + " does not exist");
+							if (cId.equals("q") || cId.equals("Q")) {
+								System.out.println("Cancelling...");
+								k1 = 1;
+								break;
 							} else {
-								boolean cExist = false;
-								for (Course c:se.getCourses()) {
-									if (cItem == c) {
-										System.out.println("ERROR: Course " + cItem.getName() + " is already enrolled for this semester");
-										cExist = true;
-										break;
+								Course cItem = isCourseIncluded(cId);
+								if (cItem == null) {
+									System.out.println("ERROR: Course with ID " + cId + " does not exist");
+								} else {
+									boolean cExist = false;
+									for (Course c:se.getCourses()) {
+										if (cItem == c) {
+											System.out.println("ERROR: Course " + cItem.getName() + " is already enrolled for this semester");
+											cExist = true;
+											break;
+										}
 									}
-								}
-								if (!cExist) {
-									se.getCourses().add(cItem);
-									System.out.println("Course " + cItem.getName() + " is added to this enrolment");
-									char u;
-									int u3 = 0;
-									while (u3 == 0) {
-										System.out.print("Do you want to add another course? (Y/N): ");
-										u = scanner1.next().charAt(0);
-										if (u == 'n' || u == 'N') {
-											u2 = 1;
-//											scanner1.close();
-											break;
-										} else if (u == 'y' || u == 'Y') {
-											break;
-										} else {
-											System.out.println("ERROR: Invalid option");
+									if (!cExist) {
+										se.getCourses().add(cItem);
+										System.out.println("SUCCESS: Course " + cItem.getName() + " is added to this enrolment");
+										char u;
+										int k2 = 0;
+										while (k2 == 0) {
+											System.out.print("Do you want to add another course? (Y/N): ");
+											u = scanner1.next().charAt(0);
+											if (u == 'n' || u == 'N') {
+												k1 = 1;
+//												scanner1.close();
+												break;
+											} else if (u == 'y' || u == 'Y') {
+												break;
+											} else {
+												System.out.println("ERROR: Invalid option");
+											}
 										}
 									}
 								}
@@ -204,8 +247,8 @@ public class StudentEnrolmentSystem implements StudentEnrolmentManager {
 	}
 	
 	@Override
-	public void getAll() {
-		// TODO Auto-generated method stub
+	public ArrayList<StudentEnrolment> getAll() {
+		return enrolmentList;
 		
 	}
 	

@@ -1,5 +1,7 @@
 package enrolmentSystem;
 
+import java.util.ArrayList;
+
 public interface StudentEnrolmentManager {
 	
 	public void add();
@@ -10,7 +12,7 @@ public interface StudentEnrolmentManager {
 	
 	public StudentEnrolment getOneByStudentAndSemester(Student student, String semester);
 	
-	public void getAll();
+	public ArrayList<StudentEnrolment> getAll();
 	
 	
 }

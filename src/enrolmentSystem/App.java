@@ -16,9 +16,12 @@ public class App {
 		Student s1 = new Student("s001", "Gorgeous George", LocalDate.of(2000, 12, 24));
 		Student s2 = new Student("s002", "Posh Pete", LocalDate.of(2000, 2, 9));
 		Student s3 = new Student("s003", "Ronald McDonald", LocalDate.of(2001, 5, 13));
+		Student s4 = new Student("s004", "Norm McDormand", LocalDate.of(2001, 11, 19));
 		Course c1 = new Course("c001", "SADI", 3);
 		Course c2 = new Course("c002", "SEPT", 4);
 		Course c3 = new Course("c003", "Web Programming", 2);
+		Course c4 = new Course("c004", "Maths n Stuff", 2);
+		Course c5 = new Course("c005", "Programming 1", 3);
 		ArrayList<Course> cs1 = new ArrayList<Course>();
 		ArrayList<Course> cs2 = new ArrayList<Course>();
 		cs1.add(c1); 
@@ -35,9 +38,12 @@ public class App {
 		ses.addStudent(s1);
 		ses.addStudent(s2);
 		ses.addStudent(s3);
+		ses.addStudent(s4);
 		ses.addCourse(c1);
 		ses.addCourse(c2);
 		ses.addCourse(c3);
+		ses.addCourse(c4);
+		ses.addCourse(c5);
 		ses.addEnrolment(se1);
 		ses.addEnrolment(se2);
 		
@@ -123,7 +129,7 @@ public class App {
 			 * so the prompt would appear again.
 			 */
 			while (r1 == 0) {
-				System.out.print("Do you want to select another option? (Y/N): ");
+				System.out.print("Do you want to go back to Main Menu (Y) or Quit (N)? (Y/N): ");
 				r = scanner.next().charAt(0);
 				if (r == 'n' || r == 'N') {
 					System.out.println("Exiting program");
