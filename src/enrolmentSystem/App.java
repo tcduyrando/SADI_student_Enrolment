@@ -26,6 +26,11 @@ public class App {
 		ses.addCourse(c2);
 		ses.addCourse(c3);
 		
+		System.out.println(s1);
+		System.out.println(s2);
+		System.out.println(c1);
+		System.out.println(c2);
+		
 //		StudentEnrolment se1 = new StudentEnrolment(s1, c1, "2021A");
 //		StudentEnrolment se2 = new StudentEnrolment(
 //				new Student("s002", "Posh Pete", LocalDate.of(2001, 4, 15)),

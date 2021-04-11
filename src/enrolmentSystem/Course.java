@@ -39,10 +39,7 @@ public class Course {
 	
 	@Override
 	public String toString() {
-		return String.format(
-				"Course ID: %s\nCourse name: %s\nCourse credits: %s\n",
-				this.id, this.name, this.numOfCredits
-		);
+		return "Course [id=" + id + ", name=" + name + ", numOfCredits=" + numOfCredits + "]";
 	}
 
 }

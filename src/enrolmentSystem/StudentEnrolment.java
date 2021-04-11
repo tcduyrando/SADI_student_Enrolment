@@ -5,13 +5,13 @@ import java.util.*;
 public class StudentEnrolment {
 	
 	private Student student;
-	private Course course;
+	private ArrayList<Course> courses;
 	private String semester;
 	
-	public StudentEnrolment(Student student, Course course, String semester) {
+	public StudentEnrolment(Student student, ArrayList<Course> courses, String semester) {
 		super();
 		this.student = student;
-		this.course = course;
+		this.courses = courses;
 		this.semester = semester;
 	}
 
@@ -23,12 +23,12 @@ public class StudentEnrolment {
 		this.student = student;
 	}
 
-	public Course getCourse() {
-		return course;
+	public ArrayList<Course> getCourses() {
+		return courses;
 	}
 
-	public void setCourse(Course course) {
-		this.course = course;
+	public void setCourses(ArrayList<Course> courses) {
+		this.courses = courses;
 	}
 
 	public String getSemester() {
@@ -38,5 +38,18 @@ public class StudentEnrolment {
 	public void setSemester(String semester) {
 		this.semester = semester;
 	}
+
+	@Override
+	public String toString() {
+		String str = "Enrolment {Student {id=" + student.getId() + ", name=" + student.getName() + ", birthdate=" + student.getBirthdate() + "}, "
+				+ "Courses [";
+		for (Course c:courses) {
+			str = str + "{id=" + c.getId() + ", name=" + c.getName() + ", credits=" + c.getNumOfCredits() + "}";
+		}
+		str = str + "], semester=" + semester + "}";
+		return str;
+	}
+	
+	
 
 }

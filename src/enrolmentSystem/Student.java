@@ -42,10 +42,7 @@ public class Student {
 
 	@Override
 	public String toString() {
-		return String.format(
-				"Student ID: %s\nStudent name: %s\nStudent birthdate: %s\n",
-				this.id, this.name, this.birthdate
-		);
+		return "Student [id=" + id + ", name=" + name + ", birthdate=" + birthdate + "]";
 	}
 	
 	
