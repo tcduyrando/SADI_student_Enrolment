@@ -44,7 +44,7 @@ public class StudentEnrolmentSystem implements StudentEnrolmentManager {
 	}
 	
 	@Override
-	public void addEnrolment() {
+	public void add() {
 		Scanner scan1 = new Scanner(System.in);
 		System.out.print("Enter student ID: ");
 		String sId = scan1.next();
@@ -87,8 +87,13 @@ public class StudentEnrolmentSystem implements StudentEnrolmentManager {
 	}
 	
 	@Override
-	public void getOne() {
-		// TODO Auto-generated method stub
+	public StudentEnrolment getOneByStudentAndSemester(String sId, String semester) {
+		for (StudentEnrolment se:enrolmentList) {
+			if (se.getStudent().getId().equals(sId) && se.getSemester().equals(semester)) {
+				return se;
+			}
+		}
+		return null;
 		
 	}
 	

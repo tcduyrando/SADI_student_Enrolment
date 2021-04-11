@@ -36,6 +36,7 @@ public class App {
 //		System.out.println(s1.toString());
 //		System.out.println(c1.toString());		
 		
+		
 		/*
 		 * This will show the main menu
 		 * As long as r = 'y', the program will run and the menu will show.
@@ -44,7 +45,7 @@ public class App {
 		char r = 'y';
 		do {
 			System.out.println("\n ************Student Enrolment System************ \n"
-					+ "Press 1 to Enrol a Student for 1 Semester \n"
+					+ "Press 1 to Enroll a Student for 1 Semester \n"
 					+ "Press 2 to Update an Enrolment of a Student for 1 Semester \n"
 					+ "Press 3 to Display all Enrolments \n"
 					+ "Press 4 to Print courses for 1 Student in 1 Semester \n"
@@ -53,20 +54,26 @@ public class App {
 			System.out.print("Enter option: ");
 			int a = scanner.nextInt();
 			switch(a) {
+			// Press 1 to Enroll a Student for 1 Semester
 				case 1:
 					System.out.println("\n ------Option 1 selected------");
-					ses.addEnrolment();
+					ses.add();
 					break;
+			// Press 2 to Update an Enrollment of a Student for 1 Semester
 				case 2:
 					System.out.println("\n ------Option 2 selected------");
+					
 					break;
+			// Press 3 to Display all Enrollments
 				case 3:
 					System.out.println("\n ------Option 3 selected------");
 					ses.displayAllEnrolments();
 					break;
+			// Press 4 to Print courses for 1 Student in 1 Semester
 				case 4:
 					System.out.println("\n ------Option 4 selected------");
 					break;
+			// Press 5 to Exit
 				case 5:
 					System.out.println("Exiting program");
 					System.exit(0);
