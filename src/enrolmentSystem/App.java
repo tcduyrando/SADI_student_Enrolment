@@ -3,7 +3,6 @@ package enrolmentSystem;
 import java.util.*;
 
 import java.time.LocalDate;
-import java.text.SimpleDateFormat;
 
 public class App {
 	
@@ -11,25 +10,44 @@ public class App {
 	
 	public static void main(String[] args) {
 		
-//		Data population for Student and Course
+		/*
+		 * Data population for Student and Course
+		 */
 		Student s1 = new Student("s001", "Gorgeous George", LocalDate.of(2000, 12, 24));
 		Student s2 = new Student("s002", "Posh Pete", LocalDate.of(2000, 2, 9));
 		Student s3 = new Student("s003", "Ronald McDonald", LocalDate.of(2001, 5, 13));
 		Course c1 = new Course("c001", "SADI", 3);
 		Course c2 = new Course("c002", "SEPT", 4);
 		Course c3 = new Course("c003", "Web Programming", 2);
+		ArrayList<Course> cs1 = new ArrayList<Course>();
+		ArrayList<Course> cs2 = new ArrayList<Course>();
+		cs1.add(c1); 
+		cs1.add(c2); 
+		cs2.add(c2); 
+		cs2.add(c3); 
 		
+		StudentEnrolment se1 = new StudentEnrolment(s1, cs1, "2020C");
+		StudentEnrolment se2 = new StudentEnrolment(s2, cs2, "2021A");
+		
+		/*
+		 * Add Students to studentList and Courses to courseList
+		 */
 		ses.addStudent(s1);
 		ses.addStudent(s2);
 		ses.addStudent(s3);
 		ses.addCourse(c1);
 		ses.addCourse(c2);
 		ses.addCourse(c3);
+		ses.addEnrolment(se1);
+		ses.addEnrolment(se2);
+		
 		
 		System.out.println(s1);
 		System.out.println(s2);
+		System.out.println(s3);
 		System.out.println(c1);
 		System.out.println(c2);
+		System.out.println(c3);
 		
 //		StudentEnrolment se1 = new StudentEnrolment(s1, c1, "2021A");
 //		StudentEnrolment se2 = new StudentEnrolment(
@@ -54,37 +72,47 @@ public class App {
 					+ "Press 2 to Update an Enrolment of a Student for 1 Semester \n"
 					+ "Press 3 to Display all Enrolments \n"
 					+ "Press 4 to Print courses for 1 Student in 1 Semester \n"
-					+ "Press 5 to Exit");
+					+ "Press 5 to Print all students of 1 course in 1 semester \n"
+					+ "Press 6 to Prints all courses offered in 1 semester \n"
+					+ "Press 7 to Exit");
 			Scanner scanner = new Scanner(System.in);
 			System.out.print("Enter option: ");
 			int a = scanner.nextInt();
 			switch(a) {
-			// Press 1 to Enroll a Student for 1 Semester
+				// Press 1 to Enroll a Student for 1 Semester
 				case 1:
 					System.out.println("\n ------Option 1 selected------");
 					ses.add();
 					break;
-			// Press 2 to Update an Enrollment of a Student for 1 Semester
+				// Press 2 to Update an Enrollment of a Student for 1 Semester
 				case 2:
 					System.out.println("\n ------Option 2 selected------");
-					
+					ses.update();
 					break;
-			// Press 3 to Display all Enrollments
+				// Press 3 to Display all Enrollments
 				case 3:
 					System.out.println("\n ------Option 3 selected------");
 					ses.displayAllEnrolments();
 					break;
-			// Press 4 to Print courses for 1 Student in 1 Semester
+				// Press 4 to Print courses for 1 Student in 1 Semester
 				case 4:
 					System.out.println("\n ------Option 4 selected------");
 					break;
-			// Press 5 to Exit
+				// Press 5 to Print all students of 1 course in 1 semester
 				case 5:
+					System.out.println("\n ------Option 5 selected------");
+					break;
+				// Press 6 to Prints all courses offered in 1 semester
+				case 6:
+					System.out.println("\n ------Option 6 selected------");
+					break;
+				// Press 7 to Exit
+				case 7:
 					System.out.println("Exiting program");
 					System.exit(0);
 					break;
 				default:
-					System.out.println("Invalid option");
+					System.out.println("ERROR: Invalid option");
 			}
 			int r1 = 0;
 			/*
@@ -99,12 +127,13 @@ public class App {
 				r = scanner.next().charAt(0);
 				if (r == 'n' || r == 'N') {
 					System.out.println("Exiting program");
+					scanner.close();
 					System.exit(0);
 				} else if (r == 'y' || r == 'Y') {
 					r1 = 1;
 					break;
 				} else {
-					System.out.println("Invalid option");
+					System.out.println("ERROR: Invalid option");
 				}
 			}
 			

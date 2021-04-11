@@ -8,7 +8,7 @@ public interface StudentEnrolmentManager {
 	
 	public void delete();
 	
-	public StudentEnrolment getOneByStudentAndSemester(String sId, String semester);
+	public StudentEnrolment getOneByStudentAndSemester(Student student, String semester);
 	
 	public void getAll();
 	

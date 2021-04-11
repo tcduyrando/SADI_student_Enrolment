@@ -1,7 +1,6 @@
 package enrolmentSystem;
 
 import java.util.*;
-import java.util.List;
 
 public class StudentEnrolmentSystem implements StudentEnrolmentManager {
 	
@@ -21,6 +20,10 @@ public class StudentEnrolmentSystem implements StudentEnrolmentManager {
 	
 	public void addCourse(Course s) {
 		courseList.add(s);
+	}
+	
+	public void addEnrolment(StudentEnrolment se) {
+		enrolmentList.add(se);
 	}
 	
 //	Check if student with this ID is included
@@ -45,43 +48,44 @@ public class StudentEnrolmentSystem implements StudentEnrolmentManager {
 	
 	@Override
 	public void add() {
-		Scanner scan1 = new Scanner(System.in);
+		Scanner scanner1 = new Scanner(System.in);
 		System.out.print("Enter student ID: ");
-		String sId = scan1.next();
+		String sId = scanner1.next();
 		Student sItem = isStudentIncluded(sId);
 		if (sItem == null) {
-			System.out.println("Student with ID " + sId + " does not exist");
+			System.out.println("ERROR: Student with ID " + sId + " does not exist");
 		} else {
 			System.out.print("Enter semester: ");
-			String sem = scan1.next();
+			String sem = scanner1.next();
 			ArrayList<Course> cs = new ArrayList<Course>();
-			int r2 = 0;
-			while(r2 == 0) {
+			int u2 = 0;
+			while(u2 == 0) {
 				System.out.print("Enter course ID: ");
-				String cId = scan1.next();
+				String cId = scanner1.next();
 				Course cItem = isCourseIncluded(cId);
 				if (cItem == null) {
-					System.out.println("Course with ID " + cId + " does not exist");
+					System.out.println("ERROR: Course with ID " + cId + " does not exist");
 				} else {
 					cs.add(cItem);
-					char r;
-					int r3 = 0;
-					while (r3 == 0) {
+					char u;
+					int u3 = 0;
+					while (u3 == 0) {
 						System.out.print("Do you want to add another course? (Y/N): ");
-						r = scan1.next().charAt(0);
+						u = scanner1.next().charAt(0);
 						
-						if (r == 'n' || r == 'N') {
+						if (u == 'n' || u == 'N') {
 							StudentEnrolment se = new StudentEnrolment(sItem, cs, sem);
 							enrolmentList.add(se);
 							System.out.println("New enrolment added!");
 							System.out.println(se);
-							r2 = 1;
+							u2 = 1;
+							scanner1.close();
 							break;
 							
-						} else if (r == 'y' || r == 'Y') {
-							r3 = 1;
+						} else if (u == 'y' || u == 'Y') {
+							u3 = 1;
 						} else {
-							System.out.println("Invalid option");
+							System.out.println("ERROR: Invalid option");
 						}
 					}
 				}
@@ -92,8 +96,94 @@ public class StudentEnrolmentSystem implements StudentEnrolmentManager {
 	
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-		
+		Scanner scanner1 = new Scanner(System.in);
+		System.out.print("Enter student ID: ");
+		String sId = scanner1.next();
+		Student sItem = isStudentIncluded(sId);
+		if (sItem == null) {
+			System.out.println("ERROR: Student with ID " + sId + " does not exist");
+		} else {
+			System.out.print("Enter semester: ");
+			String sem = scanner1.next();
+			StudentEnrolment se = getOneByStudentAndSemester(sItem, sem);
+			if (se == null) {
+				System.out.println("ERROR: Enrolment with student ID " + sId + " and semester " + sem + " does not exist");
+			} else {
+				System.out.println("Enrolment found: ");
+//				System.out.println(se.getStudent() + ", Semester=" + se.getSemester());
+//				for (Course c:se.getCourses()) {
+//					System.out.println(c);
+//				}
+				System.out.println(" - " + se);
+				System.out.println("Press 1 to Delete a course");
+				System.out.println("Press 2 to Add a course");
+				System.out.print("Enter option: ");
+				int a = scanner1.nextInt();
+				switch(a) {
+					// Press 1 to Delete a course
+					case 1:
+						int i = 0;
+						for (Course c:se.getCourses()) {
+							i = i + 1;
+							System.out.println(" " + i + ". " + c);
+						}
+						int u1 = 0;
+						while (u1 == 0) {
+							System.out.print("Enter the index number of the course you wish to delete \n"
+									+ "(Example: Press 1 to delete the first course) : ");
+							int cIndex = scanner1.nextInt() - 1;
+							if (cIndex < 0 || cIndex > i - 1) {
+								System.out.println("ERROR: Invalid index number");
+							} else {
+								System.out.println("Course " + se.getCourses().get(cIndex).getName() + " is removed from this enrolment");
+								se.getCourses().remove(cIndex);
+								break;
+							}
+						}
+						break;
+					// Press 2 to Add a course
+					case 2:
+						int u2 = 0;
+						while(u2 == 0) {
+							System.out.print("Enter course ID to add: ");
+							String cId = scanner1.next();
+							Course cItem = isCourseIncluded(cId);
+							if (cItem == null) {
+								System.out.println("ERROR: Course with ID " + cId + " does not exist");
+							} else {
+								boolean cExist = false;
+								for (Course c:se.getCourses()) {
+									if (cItem == c) {
+										System.out.println("ERROR: Course " + cItem.getName() + " is already enrolled for this semester");
+										cExist = true;
+										break;
+									}
+								}
+								if (!cExist) {
+									se.getCourses().add(cItem);
+									System.out.println("Course " + cItem.getName() + " is added to this enrolment");
+									char u;
+									int u3 = 0;
+									while (u3 == 0) {
+										System.out.print("Do you want to add another course? (Y/N): ");
+										u = scanner1.next().charAt(0);
+										if (u == 'n' || u == 'N') {
+											u2 = 1;
+//											scanner1.close();
+											break;
+										} else if (u == 'y' || u == 'Y') {
+											break;
+										} else {
+											System.out.println("ERROR: Invalid option");
+										}
+									}
+								}
+							}
+						}
+						break;
+				}
+			}
+		}
 	}
 	
 	@Override
@@ -103,9 +193,9 @@ public class StudentEnrolmentSystem implements StudentEnrolmentManager {
 	}
 	
 	@Override
-	public StudentEnrolment getOneByStudentAndSemester(String sId, String semester) {
+	public StudentEnrolment getOneByStudentAndSemester(Student student, String semester) {
 		for (StudentEnrolment se:enrolmentList) {
-			if (se.getStudent().getId().equals(sId) && se.getSemester().equals(semester)) {
+			if (se.getStudent().equals(student) && se.getSemester().equals(semester)) {
 				return se;
 			}
 		}
