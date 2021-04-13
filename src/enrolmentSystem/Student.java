@@ -8,6 +8,9 @@ public class Student {
 	private String name;
 	private LocalDate birthdate;
 	
+	/*
+	 * This constructs the Student object
+	 */
 	public Student(String id, String name, LocalDate birthdate) {
 		super();
 		this.id = id;
@@ -39,6 +42,9 @@ public class Student {
 		this.birthdate = birthdate;
 	}
 
+	/*
+	 * Returns a Student in the form of a string 
+	 */
 	@Override
 	public String toString() {
 		return "Student [id=" + id + ", name=" + name + ", birthdate=" + birthdate + "]";

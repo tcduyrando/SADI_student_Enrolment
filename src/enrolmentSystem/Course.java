@@ -6,6 +6,9 @@ public class Course {
 	private String name;
 	private int numOfCredits;
 	
+	/*
+	 * This constructs the Course object
+	 */
 	public Course(String id, String name, int numOfCredits) {
 		super();
 		this.id = id;
@@ -37,6 +40,9 @@ public class Course {
 		this.numOfCredits = numOfCredits;
 	}
 	
+	/*
+	 * Returns a Course in the form of a string 
+	 */
 	@Override
 	public String toString() {
 		return "Course [id=" + id + ", name=" + name + ", numOfCredits=" + numOfCredits + "]";

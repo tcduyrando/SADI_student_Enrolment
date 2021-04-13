@@ -8,6 +8,9 @@ public class StudentEnrolment {
 	private Course course;
 	private String semester;
 	
+	/*
+	 * This constructs the StudentEnrolment object
+	 */
 	public StudentEnrolment(Student student, Course course, String semester) {
 		super();
 		this.student = student;
@@ -39,6 +42,9 @@ public class StudentEnrolment {
 		this.semester = semester;
 	}
 
+	/*
+	 * Returns a StudentEnrolment in the form of a string 
+	 */
 	@Override
 	public String toString() {
 		String str = "Enrolment {Student [id=" + student.getId() + ", name=" + student.getName() + ", birthdate=" + student.getBirthdate() + "], "
