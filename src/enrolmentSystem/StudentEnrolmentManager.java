@@ -10,7 +10,11 @@ public interface StudentEnrolmentManager {
 	
 	public void delete();
 	
-	public StudentEnrolment getOneByStudentAndSemester(Student student, String semester);
+	public ArrayList<StudentEnrolment> getAllByStudentAndSemester(Student student, String semester);
+	
+	public ArrayList<StudentEnrolment> getAllByCourseAndSemester(Course course, String semester);
+	
+	public ArrayList<StudentEnrolment> getAllBySemester(String semester);
 	
 	public ArrayList<StudentEnrolment> getAll();
 	

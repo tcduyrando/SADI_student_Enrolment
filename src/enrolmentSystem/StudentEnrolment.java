@@ -5,13 +5,13 @@ import java.util.*;
 public class StudentEnrolment {
 	
 	private Student student;
-	private ArrayList<Course> courses;
+	private Course course;
 	private String semester;
 	
-	public StudentEnrolment(Student student, ArrayList<Course> courses, String semester) {
+	public StudentEnrolment(Student student, Course course, String semester) {
 		super();
 		this.student = student;
-		this.courses = courses;
+		this.course = course;
 		this.semester = semester;
 	}
 
@@ -23,12 +23,12 @@ public class StudentEnrolment {
 		this.student = student;
 	}
 
-	public ArrayList<Course> getCourses() {
-		return courses;
+	public Course getCourse() {
+		return course;
 	}
 
-	public void setCourses(ArrayList<Course> courses) {
-		this.courses = courses;
+	public void setCourse(Course courses) {
+		this.course = course;
 	}
 
 	public String getSemester() {
@@ -41,12 +41,9 @@ public class StudentEnrolment {
 
 	@Override
 	public String toString() {
-		String str = "Enrolment {Student {id=" + student.getId() + ", name=" + student.getName() + ", birthdate=" + student.getBirthdate() + "}, "
-				+ "Courses [";
-		for (Course c:courses) {
-			str = str + "{id=" + c.getId() + ", name=" + c.getName() + ", credits=" + c.getNumOfCredits() + "}";
-		}
-		str = str + "], semester=" + semester + "}";
+		String str = "Enrolment {Student [id=" + student.getId() + ", name=" + student.getName() + ", birthdate=" + student.getBirthdate() + "], "
+				+ "semester=" + semester + ", "
+				+ "Course [id=" + course.getId() + ", name=" + course.getName() + ", credits=" + course.getNumOfCredits() + "]}";
 		return str;
 	}
 	
